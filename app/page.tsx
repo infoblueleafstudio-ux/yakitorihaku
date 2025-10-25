@@ -4,6 +4,7 @@ import { ChevronDown, Phone, Calendar, MapPin } from 'lucide-react';
 import { HeroSection } from '../components/sections/HeroSection';
 import { ConceptSection } from '../components/sections/ConceptSection';
 import { AccessSection } from '../components/sections/AccessSection';
+import { FooterSection } from '../components/sections/FooterSection';
 
 export default function Home() {
   return (
@@ -139,10 +140,8 @@ export default function Home() {
       {/* Access Section */}
       <AccessSection />
 
-      {/* Footer */}
-      <footer className="py-8 px-4 text-center border-t border-[#3A3A3A]">
-        <p className="text-xs text-[#DCD8D4]">© 2025 焼鳥はく 川越. All rights reserved.</p>
-      </footer>
+      {/* Footer Section */}
+      <FooterSection />
     </div>
   );
 }
