@@ -20,6 +20,12 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        // 焼鳥はく専用カラーパレット
+        charcoal: '#2B2B2B',     // 背景
+        ember: '#B24A34',         // アクセント（炭火レッド）
+        warmwhite: '#FAF8F5',     // 文字・背景差し色
+        smoke: '#4A4A4A',         // 区切り線
+        // 既存のshadcn/uiカラー
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -60,6 +66,10 @@ const config: Config = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
         },
+      },
+      fontFamily: {
+        serif: ['Zen Old Mincho', 'serif'],
+        sans: ['Noto Sans JP', 'sans-serif'],
       },
       keyframes: {
         'accordion-down': {

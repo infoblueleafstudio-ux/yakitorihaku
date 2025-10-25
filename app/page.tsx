@@ -1,34 +1,13 @@
 'use client';
 
 import { ChevronDown, Phone, Calendar, MapPin } from 'lucide-react';
+import { HeroSection } from '../components/sections/HeroSection';
 
 export default function Home() {
   return (
-    <div className="bg-[#2B2B2B] min-h-screen">
+    <div className="bg-charcoal min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen w-full overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70">
-          <img
-            src="https://images.pexels.com/photos/1105325/pexels-photo-1105325.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            alt="炭火焼き"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 text-center">
-          <h1 className="font-serif text-4xl md:text-5xl text-[#FAF8F5] mb-4 tracking-wider">
-            焼鳥はく 川越
-          </h1>
-          <p className="text-base text-[#DCD8D4] mb-8 tracking-wide">
-            備長炭で焼く、静けさの一串
-          </p>
-          <button className="bg-[#B24A34] text-white rounded-full px-8 py-3 text-sm font-medium hover:bg-[#9A3E2A] transition-colors">
-            今すぐ予約する
-          </button>
-          <div className="absolute bottom-8 animate-bounce">
-            <ChevronDown className="w-6 h-6 text-[#FAF8F5]" />
-          </div>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* Concept Section */}
       <section className="py-16 px-4">
