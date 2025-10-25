@@ -3,6 +3,7 @@
 import { ChevronDown, Phone, Calendar, MapPin } from 'lucide-react';
 import { HeroSection } from '../components/sections/HeroSection';
 import { ConceptSection } from '../components/sections/ConceptSection';
+import { AccessSection } from '../components/sections/AccessSection';
 
 export default function Home() {
   return (
@@ -136,47 +137,7 @@ export default function Home() {
       </section>
 
       {/* Access Section */}
-      <section className="py-16 px-4 bg-[#232323]">
-        <div className="max-w-[420px] mx-auto">
-          <h2 className="text-2xl font-serif text-[#FAF8F5] mb-8 text-center">
-            アクセス
-          </h2>
-          <div className="bg-[#2B2B2B] rounded-2xl overflow-hidden shadow-lg mb-6">
-            <div className="h-48 bg-gradient-to-br from-[#3A3A3A] to-[#2B2B2B] flex items-center justify-center">
-              <MapPin className="w-12 h-12 text-[#B24A34]" />
-            </div>
-          </div>
-          <div className="space-y-4 text-center mb-6">
-            <div>
-              <p className="text-xs text-[#B24A34] mb-1">営業時間</p>
-              <p className="text-sm text-[#FAF8F5]">17:00 - 23:00 (L.O. 22:30)</p>
-            </div>
-            <div>
-              <p className="text-xs text-[#B24A34] mb-1">定休日</p>
-              <p className="text-sm text-[#FAF8F5]">月曜日・第三火曜日</p>
-            </div>
-            <div>
-              <p className="text-xs text-[#B24A34] mb-1">住所</p>
-              <p className="text-sm text-[#FAF8F5]">埼玉県川越市脇田町XX-XX</p>
-              <p className="text-xs text-[#DCD8D4] mt-1">JR・東武東上線 川越駅 徒歩5分</p>
-            </div>
-          </div>
-          <div className="flex justify-between gap-3 mt-8">
-            <button className="flex-1 flex flex-col items-center justify-center bg-[#B24A34] text-white rounded-xl px-4 py-4 hover:bg-[#9A3E2A] transition-colors">
-              <Phone className="w-5 h-5 mb-2" />
-              <span className="text-xs">電話する</span>
-            </button>
-            <button className="flex-1 flex flex-col items-center justify-center bg-[#B24A34] text-white rounded-xl px-4 py-4 hover:bg-[#9A3E2A] transition-colors">
-              <Calendar className="w-5 h-5 mb-2" />
-              <span className="text-xs">予約する</span>
-            </button>
-            <button className="flex-1 flex flex-col items-center justify-center bg-[#B24A34] text-white rounded-xl px-4 py-4 hover:bg-[#9A3E2A] transition-colors">
-              <MapPin className="w-5 h-5 mb-2" />
-              <span className="text-xs">地図</span>
-            </button>
-          </div>
-        </div>
-      </section>
+      <AccessSection />
 
       {/* Footer */}
       <footer className="py-8 px-4 text-center border-t border-[#3A3A3A]">
