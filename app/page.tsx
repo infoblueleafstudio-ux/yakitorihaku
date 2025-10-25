@@ -2,6 +2,7 @@
 
 import { ChevronDown, Phone, Calendar, MapPin } from 'lucide-react';
 import { HeroSection } from '../components/sections/HeroSection';
+import { ConceptSection } from '../components/sections/ConceptSection';
 
 export default function Home() {
   return (
@@ -10,25 +11,7 @@ export default function Home() {
       <HeroSection />
 
       {/* Concept Section */}
-      <section className="py-16 px-4">
-        <div className="max-w-[420px] mx-auto">
-          <div className="rounded-2xl overflow-hidden mb-6 shadow-lg">
-            <img
-              src="https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              alt="職人の手元"
-              className="w-full h-64 object-cover"
-            />
-          </div>
-          <h2 className="text-2xl font-serif text-[#FAF8F5] mb-4 text-center">
-            香りが伝わる、静かな炎
-          </h2>
-          <p className="text-sm leading-relaxed text-[#DCD8D4] text-center">
-            備長炭の遠赤外線効果により、串の芯までじっくりと火を通します。<br />
-            厳選した国産鶏と旬の野菜を、職人の手で一本一本丁寧に仕上げる。<br />
-            静かな店内で、炭火の音と香りをお楽しみください。
-          </p>
-        </div>
-      </section>
+      <ConceptSection />
 
       {/* Menu Section */}
       <section className="py-16 px-4 bg-[#232323]">
