@@ -1,227 +1,108 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Phone, Calendar, MapPin } from "lucide-react";
 
 /**
  * 焼鳥はく 川越 アクセスセクション
- * 来訪者が「行きたい」と思った瞬間に、店舗情報・営業時間・地図への導線を明確に提示
- * コンセプトの余韻を保ちながら、信頼感のある締めくくりとして設計
+ * 静けさ×高級感×和モダンのトーンで店舗情報と予約動線を明示
  */
 export const AccessSection = () => {
   return (
     <motion.section
       id="access"
-      className="relative min-h-[70svh] py-16 px-4"
+      className="relative w-full min-h-[80svh] py-24 px-6 md:px-12 overflow-hidden"
       style={{
-        background: "linear-gradient(135deg, #1A1A1A 0%, #2B2B2B 100%)"
+        background: "linear-gradient(135deg, #2B2B2B 0%, #1A1A1A 50%, #B24A34 100%)",
       }}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 1.2, ease: "easeOut" }}
     >
-      <div className="max-w-[420px] md:max-w-4xl mx-auto">
-        {/* セクションタイトル */}
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* ヘッダー */}
         <motion.h2
-          className="text-2xl md:text-3xl lg:text-4xl font-serif text-warmwhite mb-8 text-center tracking-wider"
+          className="text-3xl md:text-4xl font-serif text-warmwhite mb-16 tracking-wider text-center"
           style={{ fontFamily: "Zen Old Mincho, serif" }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
         >
           アクセス
         </motion.h2>
 
-        {/* モバイル: 縦並び / PC: 左右2カラム */}
-        <div className="flex flex-col md:flex-row md:gap-12">
-          
-          {/* 左側: 地図エリア */}
+        {/* 2カラム構成（PC） / 縦並び（SP） */}
+        <div className="grid md:grid-cols-2 gap-12 items-center mt-12">
+          {/* 左：地図エリア */}
           <motion.div
-            className="w-full md:w-1/2 mb-8 md:mb-0"
+            className="relative"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
+            transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.4)] backdrop-blur-sm">
               <img
                 src="/images/map.jpg"
-                alt="焼鳥はく 川越店舗位置"
+                alt="焼鳥はく 川越店へのアクセス"
                 className="w-full h-64 md:h-80 object-cover"
               />
-              {/* オーバーレイグラデーション */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-              
-              {/* 地図アイコン */}
-              <div className="absolute top-4 left-4 bg-ember/90 text-white p-2 rounded-lg">
-                <MapPin className="w-5 h-5" />
-              </div>
-              
-              {/* 装飾的な光の粒子 */}
-              <motion.div
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-ember/80 rounded-full"
-                animate={{
-                  scale: [1, 1.3, 1],
-                  opacity: [0.8, 1, 0.8]
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
             </div>
           </motion.div>
 
-          {/* 右側: 情報＋CTAエリア */}
+          {/* 右：情報・ボタンエリア */}
           <motion.div
-            className="w-full md:w-1/2"
+            className="text-left space-y-6"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 1.2, ease: "easeOut", delay: 0.4 }}
+            transition={{ duration: 1.2, ease: "easeOut", delay: 0.7 }}
           >
-            {/* 営業情報 */}
-            <motion.div
-              className="space-y-6 mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 1.2, ease: "easeOut", delay: 0.6 }}
-            >
-              {/* 営業時間 */}
-              <div className="text-center md:text-left">
-                <p className="text-sm text-ember mb-1 font-medium" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
-                  営業時間
-                </p>
-                <p className="text-base text-warmwhite" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
-                  17:00 - 23:00 (L.O. 22:30)
-                </p>
-              </div>
+            {/* 店舗名・住所 */}
+            <div>
+              <p className="text-warmwhite text-lg font-serif mb-2" style={{ fontFamily: "Zen Old Mincho, serif" }}>
+                焼鳥はく 川越店
+              </p>
+              <p className="text-warmwhite/85 text-sm" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
+                〒350-0043 埼玉県川越市新富町1丁目XX
+              </p>
+            </div>
 
-              {/* 定休日 */}
-              <div className="text-center md:text-left">
-                <p className="text-sm text-ember mb-1 font-medium" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
-                  定休日
-                </p>
-                <p className="text-base text-warmwhite" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
-                  月曜日・第三火曜日
-                </p>
-              </div>
-
-              {/* 住所 */}
-              <div className="text-center md:text-left">
-                <p className="text-sm text-ember mb-1 font-medium" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
-                  住所
-                </p>
-                <p className="text-base text-warmwhite leading-relaxed" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
-                  埼玉県川越市脇田町XX-XX
-                </p>
-                <p className="text-sm text-warmwhite/70 mt-1" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
-                  JR・東武東上線 川越駅 徒歩5分
-                </p>
-              </div>
-            </motion.div>
+            {/* 営業時間・定休日 */}
+            <div>
+              <p className="text-warmwhite text-sm leading-relaxed" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
+                営業時間：17:00～23:00（L.O.22:30）
+              </p>
+              <p className="text-warmwhite text-sm leading-relaxed" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
+                定休日：月曜日・第二火曜日
+              </p>
+            </div>
 
             {/* CTAボタン群 */}
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 1.2, ease: "easeOut", delay: 0.8 }}
-            >
-              {/* 電話するボタン */}
+            <div className="flex flex-wrap gap-4 mt-6">
               <motion.a
                 href="tel:049-000-0000"
-                className="flex-1 flex flex-col items-center justify-center bg-ember text-white rounded-xl px-6 py-4 hover:bg-[#a13e2e] transition-colors duration-300 shadow-lg"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="bg-ember hover:bg-[#a13e2e] text-white rounded-full px-8 py-3 text-sm tracking-wide shadow-lg transition-colors duration-300"
+                style={{ fontFamily: "Noto Sans JP, sans-serif" }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
-                <Phone className="w-5 h-5 mb-2" />
-                <span className="text-sm font-medium" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
-                  電話する
-                </span>
+                電話する
               </motion.a>
-
-              {/* 予約するボタン */}
               <motion.a
                 href="/reserve"
-                className="flex-1 flex flex-col items-center justify-center bg-ember text-white rounded-xl px-6 py-4 hover:bg-[#a13e2e] transition-colors duration-300 shadow-lg"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="bg-transparent border border-warmwhite text-warmwhite rounded-full px-8 py-3 text-sm tracking-wide hover:bg-warmwhite/10 transition-colors duration-300"
+                style={{ fontFamily: "Noto Sans JP, sans-serif" }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
-                <Calendar className="w-5 h-5 mb-2" />
-                <span className="text-sm font-medium" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
-                  予約する
-                </span>
+                ご予約はこちら
               </motion.a>
-
-              {/* 地図を見るボタン */}
-              <motion.a
-                href="https://maps.google.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 flex flex-col items-center justify-center bg-ember text-white rounded-xl px-6 py-4 hover:bg-[#a13e2e] transition-colors duration-300 shadow-lg"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <MapPin className="w-5 h-5 mb-2" />
-                <span className="text-sm font-medium" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
-                  地図を見る
-                </span>
-              </motion.a>
-            </motion.div>
-
-            {/* 装飾的なライン */}
-            <motion.div
-              className="mt-8 flex justify-center md:justify-start"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 1.2, ease: "easeOut", delay: 1.0 }}
-            >
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-px bg-ember/60"></div>
-                <div className="w-2 h-2 bg-ember/40 rounded-full"></div>
-                <div className="w-8 h-px bg-ember/60"></div>
-              </div>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
-
-        {/* 背景装飾要素 */}
-        <motion.div
-          className="absolute top-1/3 right-1/4 w-1 h-1 bg-warmwhite/20 rounded-full"
-          animate={{
-            y: [0, -8, 0],
-            opacity: [0.2, 0.6, 0.2],
-            scale: [0.5, 1, 0.5]
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1.5
-          }}
-        />
-        
-        <motion.div
-          className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-ember/30 rounded-full"
-          animate={{
-            y: [0, -12, 0],
-            opacity: [0.3, 0.7, 0.3],
-            scale: [0.3, 1, 0.3]
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2
-          }}
-        />
       </div>
     </motion.section>
   );
