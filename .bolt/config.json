@@ -1,3 +1,5 @@
 {
-  "template": "nextjs-shadcn"
+  "ai_context_files": [
+    "./.bolt/sol.config.md"
+  ]
 }
