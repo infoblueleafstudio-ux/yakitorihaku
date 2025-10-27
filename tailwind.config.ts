@@ -20,9 +20,14 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
-        // 焼鳥はく専用カラーパレット
+        // 焼鳥はく専用カラーパレット（金箔×漆黒世界観）
+        kinpaku: '#c3a970',      // 主金
+        kinpakuSoft: '#d8c27a',  // 柔らかい金
+        kinpakuDeep: '#8f7a3f',  // 深み用
+        onyx: '#0a0a0a',         // 漆黒
+        soot: '#141414',         // 灰黒
+        ember: '#8a3b26',        // 炭火はアクセントのみ
         charcoal: '#2B2B2B',     // 背景
-        ember: '#B24A34',         // アクセント（炭火レッド）
         warmwhite: '#FAF8F5',     // 文字・背景差し色
         smoke: '#4A4A4A',         // 区切り線
         // 既存のshadcn/uiカラー

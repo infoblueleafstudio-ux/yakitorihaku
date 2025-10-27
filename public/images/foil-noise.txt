@@ -1,0 +1,4 @@
+# foil-noise.png placeholder
+# This file represents a subtle gold foil texture
+# In production, this should be replaced with an actual 128-256px noise texture
+# with light Gaussian blur and overlay/screen blend mode for gold foil effect

@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronDown, Phone, Calendar, MapPin } from 'lucide-react';
+import { Header } from '../components/layout/Header';
 import { HeroSection } from '../components/sections/HeroSection';
 import { ConceptSection } from '../components/sections/ConceptSection';
 import { MenuSection } from '../components/sections/MenuSection';
@@ -11,7 +11,10 @@ import { FooterSection } from '../components/sections/FooterSection';
 
 export default function Home() {
   return (
-    <div className="bg-charcoal min-h-screen">
+    <div className="bg-[#0a0a0a] min-h-screen">
+      {/* Header */}
+      <Header />
+
       {/* Hero Section */}
       <HeroSection />
 
