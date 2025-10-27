@@ -1,23 +1,33 @@
 "use client";
-
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, animate } from "framer-motion";
+import { useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 
 export const HeroSection = () => {
   const { scrollY } = useScroll();
 
-  // 覗き穴
   const radius = useTransform(scrollY, [0, 600], [15, 160]);
   const clipPath = useTransform(radius, (r) => `circle(${r}% at 50% 50%)`);
-
-  // 画像のゆらぎ
   const imageY = useTransform(scrollY, [0, 400], [-350, -60]);
   const scale = useTransform(scrollY, [0, 400], [1, 1.05]);
-
-  // トーン & タイトル
   const backgroundOpacity = useTransform(scrollY, [0, 300], [1, 0.85]);
   const titleOpacity = useTransform(scrollY, [0, 300], [1, 0]);
   const titleY = useTransform(scrollY, [0, 300], [0, -40]);
+
+  // ✅ 呼吸：useEffectでアニメート
+  const breathing = useSpring(0, { stiffness: 30, damping: 12, mass: 0.2 });
+  useEffect(() => {
+    const controls = animate(breathing, 1, {
+      duration: 4.8,
+      repeat: Infinity,
+      repeatType: "reverse",
+      ease: "easeInOut",
+    });
+    return () => controls.stop();
+  }, [breathing]);
+
+  const breathOpacity = useTransform(breathing, [0, 1], [0.75, 0.95]);
+  const breathY = useTransform(breathing, [0, 1], [0, -8]);
 
   return (
     <section className="relative h-[140vh] bg-[#0a0a0a] overflow-hidden">
@@ -34,9 +44,12 @@ export const HeroSection = () => {
       >
         <h2
           className="text-4xl md:text-6xl font-bold text-[#c3a970]/90 mb-3 tracking-wide"
-          style={{ fontFamily: "Zen Old Mincho, serif", textShadow: "0 0 16px rgba(195,169,112,0.14)" }}
+          style={{
+            fontFamily: "Zen Old Mincho, serif",
+            textShadow: "0 0 16px rgba(195,169,112,0.14)",
+          }}
         >
-          焼鳥はく
+          やきとり 箔
         </h2>
         <p
           className="text-lg md:text-xl text-[#c3a970]/60 tracking-[0.25em]"
@@ -54,35 +67,37 @@ export const HeroSection = () => {
         <motion.img
           src="/images/haku.png"
           alt="焼鳥はく 店内"
-          className="absolute inset-0 w-full h-full object-cover object-[50%_30%]"
-          style={{ scale, transition: "transform 0.3s ease-in-out" }}
+          className="
+            absolute inset-0 
+            w-full h-full 
+            object-cover 
+            object-[45%_30%]   /* ✅ 焦点を中央より少し左に調整 */
+          "
+          style={{ scale }}
         />
       </motion.div>
 
-      {/* 下フェード（金のにじみ層） */}
+      {/* 下フェード（金の呼吸層） */}
       <motion.div
-        className="pointer-events-none absolute bottom-0 left-0 w-full h-[16vh]"
+        className="pointer-events-none absolute bottom-0 left-0 w-full h-[22vh] z-10"
         style={{
           background:
-            // 下へ向かって黒、中央に金の霞がわずかに差す
-            'radial-gradient(120% 60% at 50% 0%, rgba(195,169,112,0.10) 0%, rgba(10,10,10,0.0) 45%), linear-gradient(to bottom, rgba(10,10,10,0) 0%, rgba(10,10,10,1) 90%)',
-          filter: 'blur(18px)',
-          opacity: 0.9,
+            "radial-gradient(120% 80% at 50% 0%, rgba(195,169,112,0.18) 0%, rgba(195,169,112,0.08) 45%, rgba(10,10,10,0.85) 100%)",
+          filter: "blur(32px)",
+          opacity: breathOpacity,
+          y: breathY,
         }}
       />
 
-      {/* Scroll ラベル（覗き穴の下端付近に固定） */}
+      {/* Scroll */}
       <motion.div
         className="pointer-events-none absolute left-1/2 -translate-x-1/2 flex flex-col items-center text-center z-20"
         style={{ top: "calc(50% + 20vh)" }}
         animate={{ y: [0, -8, 0] }}
         transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
       >
-        <ChevronDown size={22} className="text-[#c3a970]/80 mb-1" style={{ strokeWidth: 1.5 }} />
-        <span
-          className="text-[12px] tracking-[0.22em] text-[#c3a970]/80 uppercase"
-          style={{ fontFamily: "Noto Serif, serif", letterSpacing: "0.25em" }}
-        >
+        <ChevronDown size={22} className="text-[#c3a970]/80 mb-1" />
+        <span className="text-[12px] tracking-[0.22em] text-[#c3a970]/80 uppercase">
           Scroll
         </span>
       </motion.div>
