@@ -52,17 +52,18 @@ export const ConceptSection = () => {
         }}
       />
 
-      {/* 金箔層（Safari対策強化） */}
+      {/* 金箔層（間接照明風の質感強化） */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
           backgroundImage:
-            "url('/images/foil-light.png'), url('/images/foil-texture.png'), url('/images/6.svg')",
-          backgroundSize: "cover, 800px auto, 1200px auto",
-          backgroundPosition: "top center, center, 70% 20%",
-          backgroundRepeat: "no-repeat, repeat, no-repeat",
-          backgroundBlendMode: "soft-light, overlay, overlay",
-          opacity: 0.24,
+            "url('/images/foil-light.png'), url('/images/foil-texture.png')",
+          backgroundSize: "cover, 800px auto",
+          backgroundPosition: "top center, center",
+          backgroundRepeat: "no-repeat, repeat",
+          backgroundBlendMode: "lighten, overlay",
+          opacity: 0.35,
+          filter: "contrast(120%) brightness(110%)",
           mixBlendMode: "overlay",
         }}
       />
