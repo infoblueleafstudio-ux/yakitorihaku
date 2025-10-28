@@ -14,9 +14,17 @@ export const HeroSection = () => {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // ==== 覗き穴の動き ====
+  // ✅ 円の開き具合（覗き穴）
+  // PC: 縦120vh、横100vw → 中心は (50%, 60%) 付近
+  // スマホ: 縦120vh、横100vw → 中心は (50%, 50%) 付近（縦長なので真ん中）
+  const centerY = isMobile ? 50 : 43; // PCは少し上目、スマホは真ん中
   const radius = useTransform(scrollYProgress, [0, 0.35], [15, isMobile ? 120 : 160]);
-  const clipPath = useTransform(radius, (r) => `circle(${r}% at 50% 50%)`);
+  const clipPath = useTransform(radius, (r) => `circle(${r}% at 50% ${centerY}%)`);
+
+  // ✅ スクロールによる画像のズーム
+  const imageScale = useTransform(scrollYProgress, [0, 0.35, 1], [0.9, 1.0, 1.0]);
+
+  // ✅ Scrollラベルフェードアウト
   const scrollOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
 
   return (
@@ -24,9 +32,9 @@ export const HeroSection = () => {
       {/* 背景（暗→光） */}
       <motion.div
         className={`absolute inset-0 ${
-          isMobile 
-            ? 'bg-gradient-to-b from-[#000000] via-[#141414] to-[#1a1a1a]' 
-            : 'bg-gradient-to-b from-[#0a0a0a] via-[#141414] to-[#0a0a0a]'
+          isMobile
+            ? "bg-gradient-to-b from-[#000000] via-[#141414] to-[#1a1a1a]"
+            : "bg-gradient-to-b from-[#0a0a0a] via-[#141414] to-[#0a0a0a]"
         }`}
       />
 
@@ -54,10 +62,12 @@ export const HeroSection = () => {
         style={{ clipPath }}
         className="absolute inset-0 flex items-center justify-center"
       >
-        <img
-          src="/images/hakutennnai.png"
+        <motion.img
+          src="/images/hakutennnai .png" // ✅ ファイル名確認
           alt="店内"
-          className="w-full h-full object-cover object-[50%_40%] md:object-[50%_30%]"
+          className="absolute w-[120%] h-[120%] md:w-[115%] md:h-[115%] object-cover object-[50%_58%] md:object-[50%_52%] select-none pointer-events-none"
+          style={{ scale: imageScale }}
+          draggable={false}
         />
       </motion.div>
 

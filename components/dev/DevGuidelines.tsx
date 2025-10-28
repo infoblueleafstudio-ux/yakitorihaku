@@ -30,8 +30,8 @@ export const DevGuidelines = () => {
       {showGuidelines && (
         <div className="fixed inset-0 z-[9999] pointer-events-none">
           {/* ===== ガイドライン（縦・横） ===== */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-red-500 z-[10000] shadow-xl"></div>
-          <div className="absolute top-1/2 left-0 right-0 h-1 bg-blue-500 z-[10000] shadow-xl"></div>
+          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-red-500 z-[10000]"></div>
+          <div className="absolute top-1/2 left-0 right-0 h-px bg-blue-500 z-[10000]"></div>
 
           {/* Hero Section 境界（固定位置・より見やすく） */}
           <div className="absolute top-[140vh] left-0 right-0 h-3 bg-yellow-500 z-[10000] shadow-2xl"></div>
@@ -55,8 +55,8 @@ export const DevGuidelines = () => {
           >
             <p className="font-semibold text-[#c3a970] mb-1">Dev Guidelines</p>
             <ul className="space-y-[2px] text-[11px] leading-tight">
-              <li><span className="text-red-400">■</span> 縦中心線 (太線)</li>
-              <li><span className="text-blue-400">■</span> 水平中心線 (太線)</li>
+              <li><span className="text-red-400">■</span> 縦中心線</li>
+              <li><span className="text-blue-400">■</span> 水平中心線</li>
               <li><span className="text-yellow-400">■</span> Hero Section (140vh)</li>
               <li><span className="text-green-400">■</span> Concept Section (200vh)</li>
               <li><span className="text-purple-400">■</span> ビューポート境界 (100vh)</li>
