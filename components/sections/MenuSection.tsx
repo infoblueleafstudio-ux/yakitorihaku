@@ -66,7 +66,7 @@ export const MenuSection = () => {
         {/* タイトル */}
         <motion.h2
           className="text-3xl md:text-4xl font-serif text-warmwhite mb-16 tracking-wider"
-          style={{ fontFamily: "Zen Old Mincho, serif" }}
+          style={{ fontFamily: "Yuji Syuku, serif" }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
@@ -230,7 +230,7 @@ const MenuCard = ({ item }: { item: { title: string; desc: string; img: string }
       </h3>
       <p
         className="text-warmwhite/85 text-sm leading-relaxed"
-        style={{ fontFamily: "Noto Sans JP, sans-serif" }}
+          style={{ fontFamily: "Yuji Syuku, serif" }}
       >
         {item.desc}
       </p>

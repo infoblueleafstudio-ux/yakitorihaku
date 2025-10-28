@@ -41,7 +41,7 @@ export const SpaceSection = () => {
         {/* ヘッダー */}
         <motion.h2
           className="text-3xl md:text-4xl font-serif text-warmwhite mb-16 tracking-wider"
-          style={{ fontFamily: "Zen Old Mincho, serif" }}
+          style={{ fontFamily: "Yuji Syuku, serif" }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -143,7 +143,7 @@ export const SpaceSection = () => {
               text-base md:text-lg font-medium tracking-wide 
               transition-colors duration-300 shadow-lg
             "
-            style={{ fontFamily: "Noto Sans JP, sans-serif" }}
+            style={{ fontFamily: "Yuji Syuku, serif" }}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
           >

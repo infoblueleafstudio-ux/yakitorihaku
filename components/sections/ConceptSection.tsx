@@ -84,6 +84,7 @@ export const ConceptSection = () => {
         <h2
           className="text-4xl md:text-5xl font-serif mb-6 text-kinpaku"
           style={{
+            fontFamily: "Yuji Syuku, serif",
             textShadow:
               "0 0 14px rgba(195,169,112,0.25), 0 0 2px rgba(0,0,0,0.4)",
             letterSpacing: "0.04em",
@@ -91,7 +92,7 @@ export const ConceptSection = () => {
         >
           やきとり 箔の想い
         </h2>
-        <div className="leading-8 md:leading-9 text-[17px] md:text-[18px] text-white/90 font-[Noto_Serif_JP]">
+        <div className="leading-8 md:leading-9 text-[17px] md:text-[18px] text-white/90" style={{ fontFamily: "Yuji Syuku, serif" }}>
           <p>炭の音、香り、そして静けさ。一本の串に宿るのは、素材と向き合う職人の時間。</p>
           <p className="mt-4">
             備長炭の遠赤外線で、鶏の旨みを芯まで引き出す。丁寧に、誠実に、そして美しく。

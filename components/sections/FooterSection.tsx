@@ -20,7 +20,7 @@ export const FooterSection = () => {
         {/* 店舗名 */}
         <motion.p
           className="font-serif text-lg text-warmwhite"
-          style={{ fontFamily: "Zen Old Mincho, serif" }}
+          style={{ fontFamily: "Yuji Syuku, serif" }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -32,7 +32,7 @@ export const FooterSection = () => {
         {/* 住所 */}
         <motion.p
           className="text-sm"
-          style={{ fontFamily: "Noto Sans JP, sans-serif" }}
+          style={{ fontFamily: "Yuji Syuku, serif" }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -44,7 +44,7 @@ export const FooterSection = () => {
         {/* 営業時間・定休日 */}
         <motion.p
           className="text-sm"
-          style={{ fontFamily: "Noto Sans JP, sans-serif" }}
+          style={{ fontFamily: "Yuji Syuku, serif" }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -64,7 +64,7 @@ export const FooterSection = () => {
           {/* 著作権表記 */}
           <motion.p
             className="text-xs text-warmwhite/50 tracking-wide"
-            style={{ fontFamily: "Noto Sans JP, sans-serif" }}
+            style={{ fontFamily: "Yuji Syuku, serif" }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

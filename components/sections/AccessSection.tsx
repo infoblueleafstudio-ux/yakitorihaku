@@ -23,7 +23,7 @@ export const AccessSection = () => {
         {/* ヘッダー */}
         <motion.h2
           className="text-3xl md:text-4xl font-serif text-warmwhite mb-16 tracking-wider text-center"
-          style={{ fontFamily: "Zen Old Mincho, serif" }}
+          style={{ fontFamily: "Yuji Syuku, serif" }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -85,7 +85,7 @@ export const AccessSection = () => {
               <motion.a
                 href="tel:049-000-0000"
                 className="bg-ember hover:bg-[#a13e2e] text-white rounded-full px-8 py-3 text-sm tracking-wide shadow-lg transition-colors duration-300"
-                style={{ fontFamily: "Noto Sans JP, sans-serif" }}
+                style={{ fontFamily: "Yuji Syuku, serif" }}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
@@ -94,7 +94,7 @@ export const AccessSection = () => {
               <motion.a
                 href="/reserve"
                 className="bg-transparent border border-warmwhite text-warmwhite rounded-full px-8 py-3 text-sm tracking-wide hover:bg-warmwhite/10 transition-colors duration-300"
-                style={{ fontFamily: "Noto Sans JP, sans-serif" }}
+                style={{ fontFamily: "Yuji Syuku, serif" }}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >

@@ -1,9 +1,14 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Yuji_Syuku } from 'next/font/google';
 import { DevGuidelines } from '@/components/dev/DevGuidelines';
 
 const inter = Inter({ subsets: ['latin'] });
+const yujiSyuku = Yuji_Syuku({ 
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-yuji-syuku'
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} ${yujiSyuku.variable}`}>
         {children}
         <DevGuidelines />
       </body>

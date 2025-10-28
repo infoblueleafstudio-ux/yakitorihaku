@@ -41,7 +41,7 @@ export const Header = () => {
           )}
           <span 
             className="text-sm md:text-base font-medium"
-            style={{ fontFamily: "Noto Serif, serif" }}
+            style={{ fontFamily: "Yuji Syuku, serif" }}
           >
             Menu
           </span>
@@ -58,7 +58,7 @@ export const Header = () => {
         >
           <span 
             className="text-sm md:text-base font-medium"
-            style={{ fontFamily: "Noto Serif, serif" }}
+            style={{ fontFamily: "Yuji Syuku, serif" }}
           >
             Reserve - ご予約
           </span>
@@ -83,7 +83,7 @@ export const Header = () => {
             >
               <h2
                 className="text-4xl md:text-6xl font-bold text-[#c3a970] mb-8"
-                style={{ fontFamily: "Zen Old Mincho, serif" }}
+                style={{ fontFamily: "Yuji Syuku, serif" }}
               >
                 メニュー
               </h2>

@@ -45,7 +45,7 @@ export const HeroSection = () => {
         <h2
           className="text-4xl md:text-6xl font-bold text-[#c3a970]/90 mb-3 tracking-wide"
           style={{
-            fontFamily: "Zen Old Mincho, serif",
+            fontFamily: "Yuji Syuku, serif",
             textShadow: "0 0 16px rgba(195,169,112,0.14)",
           }}
         >
@@ -53,7 +53,7 @@ export const HeroSection = () => {
         </h2>
         <p
           className="text-lg md:text-xl text-[#c3a970]/60 tracking-[0.25em]"
-          style={{ fontFamily: "Noto Serif, serif" }}
+          style={{ fontFamily: "Yuji Syuku, serif" }}
         >
           KAWAGOE
         </p>
@@ -136,7 +136,7 @@ export const HeroSection = () => {
   {/* Scrollテキスト */}
   <motion.span
     className="text-[12px] tracking-[0.22em] text-[#c3a970]/90 uppercase relative z-10"
-    style={{ fontFamily: "Noto Serif, serif" }}
+    style={{ fontFamily: "Yuji Syuku, serif" }}
     animate={{ opacity: [0.5, 1, 1], y: [0, -5, 0] }}
     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
   >
