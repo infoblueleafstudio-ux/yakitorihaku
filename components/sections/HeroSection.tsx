@@ -9,7 +9,7 @@ export const HeroSection = () => {
   // ==== Motion値 ====
   const radius = useTransform(scrollY, [0, 600], [15, 160]);
   const clipPath = useTransform(radius, (r) => `circle(${r}% at 50% 50%)`);
-  const imageY = useTransform(scrollY, [0, 400], [-320, -60]);
+  const imageY = useTransform(scrollY, [0, 400], [-300, -60]);
   const scale = useTransform(scrollY, [0, 400], [1, 1.05]);
   const backgroundOpacity = useTransform(scrollY, [0, 300], [1, 0.85]);
   const titleOpacity = useTransform(scrollY, [0, 300], [1, 0]);
@@ -30,7 +30,7 @@ export const HeroSection = () => {
   const breathY = useTransform(breathing, [0, 1], [0, -8]);
 
   return (
-    <section className="relative h-[140vh] bg-[#0a0a0a] overflow-hidden">
+    <section className="relative h-[130vh] md:h-[140vh] bg-[#0a0a0a] overflow-hidden">
       {/* 背景グラデーション */}
       <motion.div
         style={{ opacity: backgroundOpacity }}
@@ -40,19 +40,21 @@ export const HeroSection = () => {
       {/* タイトル */}
       <motion.div
         style={{ opacity: titleOpacity, y: titleY }}
-        className="relative z-10 flex flex-col items-center justify-center h-[28vh] pt-[10vh] text-center"
+        className="relative z-10 flex flex-col items-center justify-end 
+                   h-[24vh] md:h-[26vh] pt-[8vh] md:pt-[10vh] text-center"
       >
         <h2
-          className="text-4xl md:text-6xl font-bold text-[#c3a970]/90 mb-3 tracking-wide"
+          className="text-4xl md:text-6xl font-bold text-[#c3a970]/90 mb-1 tracking-wide"
           style={{
             fontFamily: "Yuji Syuku, serif",
-            textShadow: "0 0 16px rgba(195,169,112,0.14)",
+            letterSpacing: "0.05em",
+            textShadow: "0 0 12px rgba(195,169,112,0.15)",
           }}
         >
           やきとり 箔
         </h2>
         <p
-          className="text-lg md:text-xl text-[#c3a970]/60 tracking-[0.25em]"
+          className="text-base md:text-lg text-[#c3a970]/70 tracking-[0.3em] mt-[0.2em]"
           style={{ fontFamily: "Yuji Syuku, serif" }}
         >
           KAWAGOE
@@ -63,8 +65,9 @@ export const HeroSection = () => {
       <motion.div
         style={{ clipPath, y: imageY }}
         className="
-          relative w-[100vw] h-[126vh] flex items-center justify-center overflow-hidden
-          -mt-[6vh] md:-mt-[4vh]   /* ✅ 覗き穴を上方向に微調整 */
+          relative w-[100vw] h-[120vh] md:h-[125vh] 
+          flex items-center justify-center overflow-hidden
+          -mt-[5vh] md:-mt-[3vh]
         "
       >
         <motion.img
@@ -74,75 +77,72 @@ export const HeroSection = () => {
             absolute inset-0 
             w-full h-full 
             object-cover 
-            object-[45%_30%] md:object-[50%_30%]  /* ✅ デバイス別に焦点位置を最適化 */
+            object-[45%_30%] md:object-[50%_30%]
           "
           style={{ scale }}
         />
       </motion.div>
 
-{/* 金の呼吸フェード */}
-<motion.div
-  className="pointer-events-none absolute bottom-0 left-0 w-full h-[22vh] z-10"
-  style={{
-    background:
-      "radial-gradient(120% 80% at 50% 0%, rgba(195,169,112,0.18) 0%, rgba(195,169,112,0.08) 45%, rgba(10,10,10,0.85) 100%)",
-    filter: "blur(32px)",
-    opacity: breathOpacity,
-    y: breathY,
-  }}
-/>
+      {/* 金の呼吸フェード */}
+      <motion.div
+        className="pointer-events-none absolute bottom-0 left-0 w-full h-[24vh] md:h-[22vh] z-10"
+        style={{
+          background:
+            "radial-gradient(120% 80% at 50% 0%, rgba(195,169,112,0.18) 0%, rgba(195,169,112,0.08) 45%, rgba(10,10,10,0.85) 100%)",
+          filter: "blur(32px)",
+          opacity: breathOpacity,
+          y: breathY,
+        }}
+      />
 
-{/* Scrollラベル（巴里夕顔風） */}
-<motion.div
-  className="pointer-events-none absolute left-1/2 -translate-x-1/2 flex flex-col items-center text-center z-20"
-  style={{ top: "calc(50% + 20vh)" }}
->
-  {/* ✨ 光の呼吸：背景パルス層 */}
-  <motion.div
-    className="absolute w-20 h-20 rounded-full bg-[#c3a970]/15 blur-3xl"
-    animate={{
-      scale: [1, 1.6, 1],
-      opacity: [0.25, 0.8, 0.25],
-      y: [0, 8, 0],
-    }}
-    transition={{
-      duration: 4.2,
-      repeat: Infinity,
-      ease: "easeInOut",
-    }}
-  />
-
-  {/* 中央発光コア（やや強め） */}
-  <motion.div
-    className="absolute w-10 h-10 rounded-full bg-[#c3a970]/20 blur-lg"
-    animate={{
-      scale: [1, 1.5, 1],
-      opacity: [1, 1.5, 1.5],
-      y: [0, 3, 0],
-    }}
-    transition={{
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut",
-    }}
-  />
-
-  {/* 矢印アイコン */}
-  <ChevronDown
-    size={22}
-    className="text-[#c3a970]/90 mb-1 relative z-10 drop-shadow-[0_0_6px_rgba(195,169,112,0.5)]"
-  />
-
-  {/* Scrollテキスト */}
-  <motion.span
-    className="text-[12px] tracking-[0.22em] text-[#c3a970]/90 uppercase relative z-10"
-    style={{ fontFamily: "Yuji Syuku, serif" }}
-    animate={{ opacity: [0.5, 1, 1], y: [0, -5, 0] }}
-    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-  >
-    Scroll
-  </motion.span>
-</motion.div>
+      {/* Scrollラベル（光の呼吸ver） */}
+      <motion.div
+        className="pointer-events-none absolute left-1/2 -translate-x-1/2 flex flex-col items-center text-center z-20"
+        style={{ top: "calc(50% + 16vh)" }}
+      >
+        {/* 光の呼吸層 */}
+        <motion.div
+          className="absolute w-20 h-20 rounded-full bg-[#c3a970]/15 blur-3xl"
+          animate={{
+            scale: [1, 1.6, 1],
+            opacity: [0.25, 0.8, 0.25],
+            y: [0, 8, 0],
+          }}
+          transition={{
+            duration: 4.2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        {/* 発光コア */}
+        <motion.div
+          className="absolute w-10 h-10 rounded-full bg-[#c3a970]/20 blur-lg"
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [1, 1.4, 1],
+            y: [0, 3, 0],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        {/* 矢印 */}
+        <ChevronDown
+          size={22}
+          className="text-[#c3a970]/90 mb-1 relative z-10 drop-shadow-[0_0_6px_rgba(195,169,112,0.5)]"
+        />
+        {/* テキスト */}
+        <motion.span
+          className="text-[12px] tracking-[0.22em] text-[#c3a970]/90 uppercase relative z-10"
+          style={{ fontFamily: "Yuji Syuku, serif" }}
+          animate={{ opacity: [0.6, 1, 0.6], y: [0, -3, 0] }}
+          transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+        >
+          Scroll
+        </motion.span>
+      </motion.div>
     </section>
   );
 };
