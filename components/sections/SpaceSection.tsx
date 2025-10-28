@@ -101,19 +101,19 @@ export const SpaceSection = () => {
       >
         {/* ✅ 背景画像（最背面） */}
         <Image
-          src="/images/spase.jpg"
+          src="/images/space1.jpg"
           alt="gold foil"
           fill
           priority
-          className="object-cover object-center brightness-[0.9] pointer-events-none"
+          className="object-cover object-center brightness-[0.75] pointer-events-none"
           style={{ zIndex: 0 }}
         />
 
-        {/* ✅ NEW ✨ 薄い黒のオーバーレイ（背景の明るさを均一に） */}
-        <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
+        {/* ✅ 黒オーバーレイ（強め） */}
+        <div className="absolute inset-0 bg-black/70 pointer-events-none"></div>
 
-        {/* ✅ 薄い赤銅グラデーションを重ねる */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1a1817]/35 via-transparent to-[#1a1817]/65 pointer-events-none"></div>
+        {/* ✅ 赤銅グラデーション（濃く） */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1a1817]/45 via-transparent to-[#1a1817]/75 pointer-events-none"></div>
 
         {/* 光のにじみ（blur） */}
         <div className="absolute inset-0 bg-[#a86b43]/20 blur-[140px] opacity-60 pointer-events-none"></div>
@@ -140,12 +140,19 @@ export const SpaceSection = () => {
               transition={{ duration: 1.0, delay: i * 0.2, ease: "easeOut" }}
               className="relative group"
             >
-              {/* 光の外枠（ホバー時に表示） */}
-              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 blur transition-all duration-700" />
+              {/* ➕ Edge Glow（にじみ強化 / 下品にならない高級感） */}
+              <motion.div
+                className="absolute -inset-[4px] rounded-2xl opacity-0 group-hover:opacity-100 pointer-events-none"
+                style={{
+                  background: "radial-gradient(ellipse at center, rgba(216,194,137,0.45), rgba(216,194,137,0) 70%)",
+                  filter: "blur(40px)",
+                }}
+                transition={{ duration: 0.9, ease: "easeOut" }}
+              />
 
               {/* カード */}
               <div 
-                className="relative z-10 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-sm cursor-pointer"
+                className="relative z-10 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-sm cursor-pointer group-hover:shadow-[0_0_24px_rgba(216,194,137,0.35)] transition-shadow duration-700"
                 onClick={() => setActiveIndex(i)}
               >
                 <div className="relative w-full h-72">
@@ -188,8 +195,18 @@ export const SpaceSection = () => {
             {spaces.map((space, i) => (
               <SwiperSlide key={i}>
                 <div className="relative group">
-                  {/* 光の外枠 */}
-                  <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 blur transition-all duration-700" />
+                  {/* ✅ スマホ常時エッジグロウ / PC は hover */}
+                  <div
+                    className="
+                      absolute inset-[-3px] rounded-2xl
+                      bg-[radial-gradient(ellipse_at_center,rgba(216,194,137,0.45),transparent)]
+                      blur-[40px]
+                      opacity-90
+                      pointer-events-none
+                      md:opacity-0 md:group-hover:opacity-100
+                      transition-all duration-700 ease-out
+                    "
+                  />
 
                   <div 
                     className="relative z-10 rounded-2xl overflow-hidden shadow-2xl cursor-pointer"

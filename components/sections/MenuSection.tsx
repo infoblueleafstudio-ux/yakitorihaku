@@ -22,7 +22,7 @@ export const MenuSection = () => {
   return (
     <motion.section
       id="menu"
-      className="relative w-full min-h-screen py-24 px-6 md:px-12 overflow-hidden bg-onyx"
+      className="relative w-full min-h-screen pt-14 pb-5 md:py-24 px-6 md:px-12 overflow-hidden bg-onyx"
       initial={{ opacity: 0.95 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: false, margin: "-100px" }}
