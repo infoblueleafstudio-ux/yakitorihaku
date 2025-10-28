@@ -89,4 +89,14 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  /* 質感（和紙 / 金箔風ノイズ） */
+  .bg-texture {
+    background-image:
+      radial-gradient(circle at 30% 20%, rgba(255,255,255,0.07), transparent 40%),
+      url('/texture/noise.png');
+    background-size: cover, 180px;
+    mix-blend-mode: soft-light;
+    opacity: 0.45;
+  }
 }

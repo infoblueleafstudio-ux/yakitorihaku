@@ -26,13 +26,13 @@ const COURSES: MenuItem[] = [
     name: "おまかせ8本",
     price: "2,420円",
     desc: "串8本 (1人前程度)",
-    img: "/images/course1.jpg",
+    img: "/images/osusume1.jpg",
   },
   {
     name: "おまかせ14本",
     price: "3,850円",
     desc: "串14本 (2人前程度)",
-    img: "/images/course2.jpg",
+    img: "/images/osusume.jpg",
   },
 ];
 

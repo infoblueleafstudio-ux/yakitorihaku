@@ -1,156 +1,305 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { useState, useEffect } from "react";
+import PrimaryCta from "@/components/ui/PrimaryCta";
 
 /**
- * 焼鳥はく 川越 空間紹介セクション
- * 静けさに包まれる高級空間を印象的に伝える
+ * SpaceSection - 静けさに包まれる空間
+ * 目的：黒の背景に柔らかい赤銅色の光が溶ける演出
+ * 判断：光の外枠＋ぼかしで空間に包まれる感覚を表現
  */
 export const SpaceSection = () => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+
+  // ESCキーで閉じる機能
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && activeIndex !== null) {
+        setActiveIndex(null);
+      }
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [activeIndex]);
+
+  // activeIndexが変更されたらcurrentSlideIndexも更新
+  useEffect(() => {
+    if (activeIndex !== null) {
+      setCurrentSlideIndex(activeIndex);
+    }
+  }, [activeIndex]);
+  
   const spaces = [
     {
       title: "カウンター席",
-      description: "職人の手さばきを間近で感じる特等席。",
-      image: "/images/space1.jpg",
+      description: "職人の手さばきを間近で感じる、特別な体験。",
+      image: "/images/kata.jpg",
     },
     {
-      title: "個室",
-      description: "静寂の中で、特別な時間をお過ごしください。",
-      image: "/images/space2.jpg",
+      title: "テーブル席",
+      description: "落ち着いた雰囲気で食事を楽しめる空間。",
+      image: "/images/mise3.jpg",
     },
     {
       title: "照明演出",
-      description: "温かみのある光が空間に深みを与えます。",
-      image: "/images/space3.jpg",
+      description: "温かい灯りが、料理と空間に深みを与えます。",
+      image: "/images/mise2.jpg",
     },
   ];
 
   return (
-    <motion.section
-      id="space"
-      className="relative w-full min-h-[80svh] py-24 px-6 md:px-12 overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #2B2B2B 0%, #1A1A1A 50%, #B24A34 100%)",
-      }}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 1.2, ease: "easeOut" }}
-    >
+    <>
+      {/* Swiper Pagination カスタムスタイル */}
+      <style jsx global>{`
+        .space-pagination .swiper-pagination-bullet {
+          background: rgba(216, 194, 137, 0.4) !important;
+          opacity: 1 !important;
+          margin: 0 3px !important;
+        }
+        .space-pagination .swiper-pagination-bullet-active {
+          background: #d8c289 !important;
+        }
+        .space-pagination .swiper-pagination {
+          position: relative !important;
+          bottom: auto !important;
+          left: auto !important;
+          transform: none !important;
+        }
+
+        /* ✅ Lightbox: 矢印デザイン */
+        .lb-prev,
+        .lb-next {
+          cursor: pointer;
+        }
+
+        /* ✅ Lightbox: ドット（スマホ用） */
+        .lb-pagination .swiper-pagination-bullet {
+          background: rgba(216, 194, 137, 0.4) !important;
+          opacity: 1 !important;
+        }
+
+        .lb-pagination .swiper-pagination-bullet-active {
+          background: #d8c289 !important;
+        }
+      `}</style>
+
+      <motion.section
+        id="space"
+        className="relative w-full min-h-[90svh] py-24 px-6 md:px-12 overflow-hidden"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+      >
+        {/* ✅ 背景画像（最背面） */}
+        <Image
+          src="/images/spase.jpg"
+          alt="gold foil"
+          fill
+          priority
+          className="object-cover object-center brightness-[0.9] pointer-events-none"
+          style={{ zIndex: 0 }}
+        />
+
+        {/* ✅ NEW ✨ 薄い黒のオーバーレイ（背景の明るさを均一に） */}
+        <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
+
+        {/* ✅ 薄い赤銅グラデーションを重ねる */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1a1817]/35 via-transparent to-[#1a1817]/65 pointer-events-none"></div>
+
+        {/* 光のにじみ（blur） */}
+        <div className="absolute inset-0 bg-[#a86b43]/20 blur-[140px] opacity-60 pointer-events-none"></div>
+
       <div className="relative z-10 max-w-6xl mx-auto text-center">
-        {/* ヘッダー */}
         <motion.h2
           className="text-3xl md:text-4xl font-serif text-warmwhite mb-16 tracking-wider"
-          style={{ fontFamily: "Yuji Syuku, serif" }}
+          style={{ fontFamily: "Zen Old Mincho, serif" }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
+          transition={{ duration: 1.2 }}
         >
           静けさに包まれる空間
         </motion.h2>
 
-        {/* デスクトップ：グリッド表示 */}
-        <div className="hidden md:grid md:grid-cols-3 gap-8">
+        {/* Desktop */}
+        <div className="hidden md:grid grid-cols-3 gap-10">
           {spaces.map((space, i) => (
             <motion.div
               key={i}
-              className="relative"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 1.0, delay: i * 0.2, ease: "easeOut" }}
+              className="relative group"
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.4)] backdrop-blur-sm">
-                <img
-                  src={space.image}
-                  alt={space.title}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              {/* 光の外枠（ホバー時に表示） */}
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 blur transition-all duration-700" />
+
+              {/* カード */}
+              <div 
+                className="relative z-10 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-sm cursor-pointer"
+                onClick={() => setActiveIndex(i)}
+              >
+                <div className="relative w-full h-72">
+                  <Image
+                    src={space.image}
+                    alt={space.title}
+                    fill
+                    className="object-cover"
+                    sizes="33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none" />
+                </div>
               </div>
-              <div className="mt-4 text-center">
-                <h3 className="text-xl font-serif text-warmwhite mb-2" style={{ fontFamily: "Zen Old Mincho, serif" }}>
-                  {space.title}
-                </h3>
-                <p className="text-warmwhite/85 text-sm" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
-                  {space.description}
-                </p>
-              </div>
+
+              {/* テキスト */}
+              <h3
+                className="mt-6 text-xl font-serif text-warmwhite"
+                style={{ fontFamily: "Zen Old Mincho, serif" }}
+              >
+                {space.title}
+              </h3>
+              <p className="text-warmwhite/70 text-sm mt-1">{space.description}</p>
             </motion.div>
           ))}
         </div>
 
-        {/* モバイル：横スライド表示 */}
+        {/* Mobile（横スライド） */}
         <div className="md:hidden">
-          <div
-            className="
-              flex overflow-x-auto snap-x snap-mandatory scroll-smooth pb-8 scrollbar-none
-              [-webkit-overflow-scrolling:touch] relative
-            "
-            style={{ 
-              scrollSnapType: 'x mandatory',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none'
+          <Swiper
+            modules={[Pagination]}
+            spaceBetween={20}
+            slidesPerView={1.1}
+            centeredSlides={true}
+            pagination={{
+              clickable: true,
+              dynamicBullets: false,
+              el: ".space-pagination",
             }}
           >
             {spaces.map((space, i) => (
-              <motion.div
-                key={i}
-                className="
-                  flex-shrink-0 snap-center w-[90%] h-[400px]
-                  mx-[5%] flex flex-col
-                "
-                style={{ scrollSnapAlign: 'center' }}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30, y: 0 }}
-                whileInView={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 1.0, delay: i * 0.2, ease: 'easeOut' }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div className="relative rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.4)] backdrop-blur-sm flex-1">
-                  <img
-                    src={space.image}
-                    alt={space.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                </div>
-                <div className="mt-4 text-center">
-                  <h3 className="text-xl font-serif text-warmwhite mb-2" style={{ fontFamily: "Zen Old Mincho, serif" }}>
+              <SwiperSlide key={i}>
+                <div className="relative group">
+                  {/* 光の外枠 */}
+                  <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 blur transition-all duration-700" />
+
+                  <div 
+                    className="relative z-10 rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
+                    onClick={() => setActiveIndex(i)}
+                  >
+                    <div className="relative w-full h-56">
+                      <Image
+                        src={space.image}
+                        alt={space.title}
+                        fill
+                        className="object-cover"
+                        sizes="100vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none" />
+                    </div>
+                  </div>
+
+                  <h3
+                    className="mt-4 text-lg font-serif text-warmwhite"
+                    style={{ fontFamily: "Zen Old Mincho, serif" }}
+                  >
                     {space.title}
                   </h3>
-                  <p className="text-warmwhite/85 text-sm" style={{ fontFamily: "Noto Sans JP, sans-serif" }}>
-                    {space.description}
-                  </p>
+                  <p className="text-warmwhite/70 text-xs mt-1">{space.description}</p>
                 </div>
-              </motion.div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
+
+          {/* カードの外に表示するインジケーター */}
+          <div className="space-pagination flex justify-center mt-4 min-h-[20px]"></div>
         </div>
 
-        {/* CTA（予約ボタン） */}
-        <motion.div
-          className="mt-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, ease: "easeOut", delay: 0.6 }}
-        >
-          <motion.button
-            className="
-              bg-ember hover:bg-[#a13e2e] text-white rounded-full 
-              px-10 py-4 md:px-12 md:py-5 
-              text-base md:text-lg font-medium tracking-wide 
-              transition-colors duration-300 shadow-lg
-            "
-            style={{ fontFamily: "Yuji Syuku, serif" }}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            ご予約はこちら
-          </motion.button>
-        </motion.div>
+        {/* CTAボタン */}
+        <PrimaryCta
+          href="https://hotpepperリンクここに"
+          label="ご予約はこちら"
+          className="mt-12 md:mt-20 flex justify-center"
+        />
       </div>
+
+      {/* ✅ Lightbox モーダル */}
+      {activeIndex !== null && (
+        <motion.div
+          className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-[200]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setActiveIndex(null)}
+        >
+          {/* 画像カウンター */}
+          <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20 text-warmwhite text-sm md:text-base">
+            {currentSlideIndex + 1} / {spaces.length}
+          </div>
+
+          {/* ✕ Close button */}
+          <button
+            className="absolute top-6 right-6 z-20 text-warmwhite text-3xl w-10 h-10 flex items-center justify-center bg-black/40 rounded-full hover:bg-black/60 transition"
+            onClick={() => setActiveIndex(null)}
+          >
+            ✕
+          </button>
+
+          {/* Swiper */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full h-full flex items-center justify-center"
+          >
+            {/* ✅ PC: 画像の外に表示する矢印 （金箔色） */}
+            <button className="lb-prev hidden md:flex absolute left-12 text-5xl text-[#d8c289] hover:scale-110 transition z-30 w-12 h-12 items-center justify-center">
+              ❮
+            </button>
+            <button className="lb-next hidden md:flex absolute right-12 text-5xl text-[#d8c289] hover:scale-110 transition z-30 w-12 h-12 items-center justify-center">
+              ❯
+            </button>
+
+            <Swiper
+              modules={[Navigation, Pagination]}
+              navigation={{
+                nextEl: '.lb-next',
+                prevEl: '.lb-prev',
+              }}
+              pagination={{
+                el: '.lb-pagination',
+                clickable: true,
+              }}
+              initialSlide={activeIndex}
+              onSlideChange={(swiper) => setCurrentSlideIndex(swiper.activeIndex)}
+              className="w-[90vw] md:w-[70vw] lg:w-[50vw] h-[80vh] md:h-[70vh]"
+            >
+              {spaces.map((space, i) => (
+                <SwiperSlide key={i}>
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={space.image}
+                      alt={space.title}
+                      fill
+                      className="object-contain rounded-xl"
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+
+            {/* ✅ Mobile: ドットインジケータ */}
+            <div className="lb-pagination md:hidden absolute bottom-8 flex justify-center"></div>
+          </div>
+        </motion.div>
+      )}
     </motion.section>
+    </>
   );
 };
