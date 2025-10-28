@@ -16,7 +16,7 @@ export const MenuSection = () => {
     { name: "ささみ", img: "/images/menu3.jpg" },
     { name: "もも", img: "/images/menu4.jpg" },
     { name: "ねぎま", img: "/images/menu5.jpg" },
-    { name: "せせり", img: "/images/menu6.jpg" },
+    { name: "せせり", img: "/images/menu7.jpg" },
   ];
 
   return (
