@@ -1,6 +1,7 @@
 "use client";
 import { motion, useScroll, useTransform, useSpring, animate } from "framer-motion";
 import { useEffect } from "react";
+import KinpakuPieces from "../KinpakuPieces";
 
 export const ConceptSection = () => {
   const { scrollY } = useScroll();
@@ -23,8 +24,6 @@ export const ConceptSection = () => {
 
   const breathOpacity = useTransform(breathing, [0, 1], [0.75, 1]);
   const breathY = useTransform(breathing, [0, 1], [0, 12]);
-
-  // ✅ 合成：スクロール + 呼吸の動き
   const topLayerY = useTransform([glowY, breathY], (values: number[]) => values[0] + values[1]);
 
   return (
@@ -32,50 +31,54 @@ export const ConceptSection = () => {
       id="concept"
       className="relative w-full min-h-[100svh] pt-[16vh] md:pt-[18vh] pb-24 overflow-hidden flex items-center justify-center"
       style={{
-        background: "linear-gradient(to bottom, #0a0a0a 0%, #141414 60%, #0a0a0a 100%)",
+        background: `
+          linear-gradient(
+            to bottom,
+            rgba(206, 159, 63, 0.55) 0%,   /* ✨ 店舗照明に近い明るい黄金 */
+            rgba(149, 112, 44, 0.45) 24%,  /* 黄金ブラウン */
+            rgba(94, 64, 31, 0.38) 48%,    /* 徐々に落ち着いたブラウン */
+            rgba(36, 25, 17, 0.82) 82%,    /* 深い焦げ茶 */
+            rgba(14, 10, 8, 1) 100%        /* 足元が暗く締まる */
+          )
+        `,
+        backgroundBlendMode: "multiply",
       }}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 1.2, ease: "easeOut" }}
     >
-      {/* 上端の金霞（呼吸連動・明るく補強） */}
+      {/* 金霞 */}
       <motion.div
         className="pointer-events-none absolute top-[-2vh] left-0 w-full h-[46vh] z-0"
         style={{
           y: topLayerY,
           opacity: breathOpacity,
           background:
-            "radial-gradient(140% 80% at 50% 0%, rgba(195,169,112,0.28) 0%, rgba(195,169,112,0.18) 35%, rgba(10,10,10,0.3) 60%, rgba(10,10,10,0.75) 95%)",
-          filter: "blur(70px)",
-          mixBlendMode: "overlay",
+            "linear-gradient(90% 55% at 50% 0%, rgba(195,169,112,0.55) 0%, rgba(195,169,112,0.25) 35%, rgba(15,10,5,0.3) 70%, rgba(10,10,10,0.85) 100%)",
+          filter: "blur(18px)",
+          mixBlendMode: "screen",
         }}
       />
 
-      {/* 金箔層（間接照明風の質感強化） */}
+      {/* 金箔層 */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
           backgroundImage:
             "url('/images/foil-light.png'), url('/images/foil-texture.png')",
-          backgroundSize: "cover, 800px auto",
+          backgroundSize: "cover, 900px auto",
           backgroundPosition: "top center, center",
           backgroundRepeat: "no-repeat, repeat",
-          backgroundBlendMode: "lighten, overlay",
-          opacity: 0.35,
-          filter: "contrast(120%) brightness(110%)",
+          backgroundBlendMode: "soft-light, soft-light",
+          opacity: 0.38,
+          filter: "contrast(110%) brightness(95%) saturate(105%)",
           mixBlendMode: "overlay",
         }}
       />
 
-      {/* ビネット */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          background:
-            "radial-gradient(120rem 60rem at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%)",
-        }}
-      />
+      {/* 金箔破片 */}
+      <KinpakuPieces />
 
       {/* テキスト */}
       <motion.div
@@ -89,13 +92,16 @@ export const ConceptSection = () => {
           style={{
             fontFamily: "Yuji Syuku, serif",
             textShadow:
-              "0 0 14px rgba(195,169,112,0.25), 0 0 2px rgba(0,0,0,0.4)",
+              "0 0 14px rgba(195,169,112,0.35), 0 0 3px rgba(0,0,0,0.5)",
             letterSpacing: "0.04em",
           }}
         >
           やきとり 箔の想い
         </h2>
-        <div className="leading-8 md:leading-9 text-[17px] md:text-[18px] text-white/90" style={{ fontFamily: "Yuji Syuku, serif" }}>
+        <div
+          className="leading-8 md:leading-9 text-[17px] md:text-[18px] text-white/90"
+          style={{ fontFamily: "Yuji Syuku, serif" }}
+        >
           <p>炭の音、香り、そして静けさ。一本の串に宿るのは、素材と向き合う職人の時間。</p>
           <p className="mt-4">
             備長炭の遠赤外線で、鶏の旨みを芯まで引き出す。丁寧に、誠実に、そして美しく。
