@@ -39,19 +39,20 @@ export const ConceptSection = () => {
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 1.2, ease: "easeOut" }}
     >
-      {/* 上端の金霞（呼吸連動） */}
+      {/* 上端の金霞（呼吸連動・明るく補強） */}
       <motion.div
         className="pointer-events-none absolute top-[-2vh] left-0 w-full h-[46vh] z-0"
         style={{
           y: topLayerY,
           opacity: breathOpacity,
           background:
-            "radial-gradient(140% 80% at 50% 0%, rgba(195,169,112,0.18) 0%, rgba(10,10,10,0.2) 60%, rgba(10,10,10,0.75) 95%)",
+            "radial-gradient(140% 80% at 50% 0%, rgba(195,169,112,0.28) 0%, rgba(195,169,112,0.18) 35%, rgba(10,10,10,0.3) 60%, rgba(10,10,10,0.75) 95%)",
           filter: "blur(70px)",
+          mixBlendMode: "overlay",
         }}
       />
 
-      {/* 金箔層 */}
+      {/* 金箔層（Safari対策強化） */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
@@ -61,7 +62,8 @@ export const ConceptSection = () => {
           backgroundPosition: "top center, center, 70% 20%",
           backgroundRepeat: "no-repeat, repeat, no-repeat",
           backgroundBlendMode: "soft-light, overlay, overlay",
-          opacity: 0.18,
+          opacity: 0.24,
+          mixBlendMode: "overlay",
         }}
       />
 

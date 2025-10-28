@@ -1,19 +1,35 @@
 "use client";
 import { motion, useScroll, useTransform, useSpring, animate } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 
 export const HeroSection = () => {
-  const { scrollY } = useScroll();
+  const { scrollY, scrollYProgress } = useScroll();
+  const [isMobile, setIsMobile] = useState(false);
 
-  // ==== Motion値 ====
-  const radius = useTransform(scrollY, [0, 600], [15, 160]);
+  // モバイル判定
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // ==== Motion値（相対化） ====
+  // PC: 15% → 160%, モバイル: 15% → 120%
+  const radius = useTransform(
+    scrollYProgress,
+    [0, 1],
+    isMobile ? [15, 120] : [15, 160]
+  );
   const clipPath = useTransform(radius, (r) => `circle(${r}% at 50% 50%)`);
-  const imageY = useTransform(scrollY, [0, 400], [-300, -60]);
-  const scale = useTransform(scrollY, [0, 400], [1, 1.05]);
-  const backgroundOpacity = useTransform(scrollY, [0, 300], [1, 0.85]);
-  const titleOpacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const titleY = useTransform(scrollY, [0, 300], [0, -40]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [-300, -60]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
+  const backgroundOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.85]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const titleY = useTransform(scrollYProgress, [0, 0.5], [0, -40]);
 
   // ==== 呼吸エフェクト ====
   const breathing = useSpring(0, { stiffness: 30, damping: 12, mass: 0.2 });
@@ -31,10 +47,14 @@ export const HeroSection = () => {
 
   return (
     <section className="relative h-[130vh] md:h-[140vh] bg-[#0a0a0a] overflow-hidden">
-      {/* 背景グラデーション */}
+      {/* 背景グラデーション（明暗差を強化） */}
       <motion.div
         style={{ opacity: backgroundOpacity }}
-        className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#141414] to-[#0a0a0a]"
+        className={`absolute inset-0 ${
+          isMobile 
+            ? 'bg-gradient-to-b from-[#000000] via-[#1a1a1a] to-[#000000]' 
+            : 'bg-gradient-to-b from-[#0a0a0a] via-[#141414] to-[#0a0a0a]'
+        }`}
       />
 
       {/* タイトル */}
