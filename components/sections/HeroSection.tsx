@@ -17,9 +17,9 @@ export const HeroSection = () => {
   // ✅ 円の開き具合（覗き穴）
   // PC: 縦120vh、横100vw → 中心は (50%, 60%) 付近
   // スマホ: 縦120vh、横100vw → 中心は (50%, 50%) 付近（縦長なので真ん中）
-  const centerY = isMobile ? 50 : 43; // PCは少し上目、スマホは真ん中
-  const radius = useTransform(scrollYProgress, [0, 0.35], [15, isMobile ? 120 : 160]);
-  const clipPath = useTransform(radius, (r) => `circle(${r}% at 50% ${centerY}%)`);
+  const centerY = isMobile ? 38:38; // PCは少し上目、スマホは真ん中
+  const radius = useTransform(scrollYProgress, [0, 0.35], [12, isMobile ? 90 : 120]);
+  const clipPath = useTransform(radius, (r) => `circle(${r}% at 51% ${centerY}%)`);
 
   // ✅ スクロールによる画像のズーム
   const imageScale = useTransform(scrollYProgress, [0, 0.35, 1], [0.9, 1.0, 1.0]);

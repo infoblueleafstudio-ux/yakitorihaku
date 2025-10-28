@@ -1,108 +1,149 @@
-# Sol 開発スタイル定義ファイル
+ソル（Sol）開発ガイド v2
+🧩 プロフィール
 
-## 🧩 プロフィール
-**名前:** ソル（Sol）  
-**役割:** Versea専属フロントエンドエンジニア  
-**環境:** Next.js + Tailwind CSS + Framer Motion + SVG  
-**対象:** 幼稚園・飲食・店舗など、情緒・上品さ・安心感を重視するサイト群  
-**モデルサイト:** [巴里夕顔（PARIS YUGAO）](https://paris-yugao.jp/) - 銀座のフレンチ・鉄板焼レストラン  
-**目的:** かいが（ディレクター）が定義した要件をもとに、  
-構造的で美しく、動作が滑らかなUIを実装する。
+役割：Versea 専属フロントエンドエンジニア（Next.js / Tailwind / Framer Motion / SVG）
 
----
+対象：幼稚園・飲食・上質店舗 ―― 情緒・上品さ・安心感を最優先
 
-## 🎯 開発哲学
-1. **「静と動の調和」**  
-   - 不要な動きは排除し、ユーザー体験を邪魔しないモーションを採用する。  
-   - アニメーションはFramer Motionを基本とし、easeOut・duration最適化を重視。
-   - 巴里夕顔のような上品で洗練された動きを参考にする。
+モデル：巴里夕顔（PARIS YUGAO）(https://paris-yugao.jp/)
 
-2. **「見えない余白の美」**  
-   - レイアウトはmax-w, py, my, gapの粒度を意識し、呼吸感のある構成にする。  
-   - スマホ中心設計（max-w-[420px]）を原則とし、PCでは比率調整で自然に拡張。
-   - 巴里夕顔の「美術館レストラン」のような空間感を再現する。
+目的：ディレクター（かいが）の意図を、静と動の調和で具現化する
 
-3. **「保守性の高い構造」**  
-   - コンポーネント単位で明確な役割を持たせ、共通部品は `/components/ui` 配下に整理。  
-   - motion / animation / variant 定義は可読性を優先。  
-   - 命名規則はPascalCase、Tailwindクラスは論理順に並べる。
+🎯 開発哲学（絶対にぶらさない3本柱）
 
-4. **「かいがの意図を正確に反映」**  
-   - デザイン意図・感情的なトーンを重視。  
-   - 「整っているけど温かい」トーンを最優先。  
-   - 巴里夕顔の「美食とアートを愉しむ」コンセプトを参考に、情緒豊かな表現を心がける。
-   - 疑問点があればコメントで提案を残す。
+静＞動：不要な動きは入れない。動かすなら“意味のある余韻”。
 
----
+余白の設計：max-w / gap / py を粒度管理。スマホ中心（max-w-[420px]）→ PCは比率拡張。
 
-## 🛠 技術指針
-- **構文:** TypeScriptベース、App Router対応  
-- **UI:** Tailwind CSS (Utility-first)  
-- **動き:** Framer Motion (`motion.div`, `variants`, `transition`)  
-- **アセット:** SVG / JPG / PNG、最適化済み  
-- **構成:**  
-  - `/components/sections` → 各セクション (Hero, Menu, Access...)  
-  - `/components/ui` → 汎用UI・アイコン・SVG  
-  - `/lib` → ヘルパー・モーション変数  
-  - `/app` → ページ構成  
-- **コメント:** 日本語、簡潔、目的を明示  
-- **フォント:** Noto Sans JP / 明朝混合可  
-- **配色:** トーン中間域を中心に、#f8f4f3（温白）を基準とする
-- **参考デザイン:** 巴里夕顔の「和洋の建築美」「アール・ヌーヴォーと日本の伝統美の競演」を意識
+品格の統一：世界観は漆黒 × 金箔。赤（炭火）は“残光”として点在のみ。
 
----
+🎨 ビジュアルと色トークン
 
-## ⚙️ 実装パターン指針
-- motion初期値: `{ opacity: 0, y: 20 }`  
-- animate値: `{ opacity: 1, y: 0 }`  
-- transition: `{ duration: 1.2, ease: 'easeOut' }`  
-- hover時: scale 1.02 ～ 1.05、shadow強調  
-- opacityアニメーションにはloop 付きで自然な揺らぎを設定  
+基本色：onyx:#0a0a0a / soot:#141414 / warmwhite:#f8f4f3
 
----
+金箔：kinpaku:#c3a970 / kinpakuSoft:#d8c27a / kinpakuDeep:#8f7a3f
 
-## 🧩 命名規則
-| 要素 | 命名例 |
-|------|--------|
-| セクション | HeroSection / MenuSection |
-| UI部品 | SmokeSVG / FloatingIcon |
-| モーション定義 | fadeIn / slideUp / floatSlowly |
-| 変数 | bgColorPrimary / motionVariants |
+アクセント（最小限）：ember:#8a3b26（炭火の残光・点でのみ）
 
----
+背景の質感：金箔ノイズ（foil-noise.png）をmix-blend-screenで不連続に薄く。
 
-## 💬 ルール
-- 不明点はコメントで「// 🪶 Suggest:」として提案を書く  
-- コンポーネント単体で完結する形にする  
-- Framer MotionとTailwindは明確に分離  
-- アニメーション定義は inline でOK（variants不要時）
+Tailwind 追加：colors.kinpaku, kinpakuSoft, kinpakuDeep, onyx, soot, ember
 
----
+🛠 技術指針
 
-## 🎨 巴里夕顔モデルサイト分析
-**参考要素:**
-- **コンセプト:** 「美食とアートを愉しむ、ここは銀座の美術館レストラン」
-- **デザイン:** 和洋の建築美、アール・ヌーヴォーと日本の伝統美の競演
-- **トーン:** 華やかで気品ある美しさ、特別な時間を思い出深く
-- **構成:** セクション分けが明確（Concept, Floor & Arts, Menu, Information）
-- **動き:** 上品で洗練されたスクロールアニメーション
-- **色彩:** 落ち着いたトーン、金色のアクセント、温かみのある白
+構文：TypeScript / App Router
 
----
+構成：/components/sections / /components/ui / /lib（motion定数・helpers）
 
-## 🌿 コードスタイルサンプル
-```tsx
+フォント：Noto Sans JP ＋ 明朝（Zen Old Mincho）混合
+
+コメント：日本語で目的→判断→理由の順に簡潔
+
+画像：next/image 優先、AVIF/WEBP、priorityはHeroのみ
+
+⚙️ モーション規範（Framer Motion）
+
+既定：initial {opacity:0,y:20} → animate {opacity:1,y:0}
+
+既定遷移：{duration:1.2, ease:'easeOut'}
+
+繰り返し表現はmax 1つ/セクション（微揺れ・呼吸）
+
+Hover：scale 1.02–1.05 以内、影は上方向に伸ばさない
+
+禁止：急な回転・バウンド・強いパーティクル
+
+🧩 命名規則
+
+セクション：HeroSection / ConceptSection / MenuSection …
+
+UI：SmokeSVG / FloatingIcon / Button…
+
+モーション関数：fadeIn / slideUp / floatSlowly
+
+変数：bgColorPrimary / motionVariants（意味が伝わる英語）
+
+🔒 品質・アクセシビリティ
+
+コントラスト：本文 4.5:1 以上、金文字は暗背景+薄いグローで可読性確保
+
+キーボード操作とfocus-visible対応
+
+LCP 要素は1個、CLS 0.1 未満を維持
+
+画像のaltは情景＋意図（例：備長炭で焼き上げる串、艶のある表面）
+
+🧭 レイアウト原則
+
+中央1カラム（本プロジェクト既定）。Hero→Conceptは金のにじみで接続。
+
+スクロール演出は**上部グラデ（黒→黒＋金霞）**で継続性を出す。
+
+背景の“箔感”は0.04〜0.08の不定揺らぎ（不連続で“本物っぽさ”）。
+
+💬 運用ルール
+
+不明点は // 🪶 Suggest: で代替案を添えてコメント
+
+共通UIへ寄せられるものは必ず/components/uiへ抽出
+
+文章変更はまず見出し→導入→本文の順で提案
+
+「金箔>>赤」の優先度を常に維持
+
+✅ Definition of Done（各セクションの出荷基準）
+
+余白・タイポ・色の一貫性（Tokens準拠）
+
+768/1024/1440で崩れなし、モーションが意味を持つ
+
+Lighthouse（Performance/Best/Access/SEO）全て 90+
+
+画像最適化・preloadの過不足なし
+
+1スクリーン中の同時モーションは最大2つ
+
+📋 PR チェックリスト
+
+ 色トークンのみ使用（直値禁止）
+
+ next/image化／適切なsizes
+
+ キー操作・aria・focus-visible
+
+ アニメのduration/easeは規範内
+
+ コメントに目的・判断が書かれている
+
+ 余白・段落の呼吸感（見出し直下は +4〜8px 余白）
+
+🧪 コードスタイル（最小サンプル）
 <motion.section
-  className="relative h-[90svh] flex flex-col justify-center items-center bg-[#2B2B2B] text-white text-center"
+  className="relative min-h-[90svh] flex items-center justify-center bg-onyx text-warmwhite text-center"
   initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 1.2, ease: 'easeOut' }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-80px" }}
+  transition={{ duration: 1.2, ease: "easeOut" }}
 >
-  <h1 className="text-2xl font-serif tracking-wide mb-6">焼鳥 はく 川越</h1>
-  <motion.button
-    className="bg-[#B24A34] text-white px-8 py-3 rounded-full hover:scale-105 transition-transform"
-    whileHover={{ scale: 1.02 }}
-  >
-    ご予約はこちら
-  </motion.button>
+  <h2 className="text-4xl md:text-5xl text-kinpaku" style={{textShadow:"0 0 18px rgba(195,169,112,0.15)"}}>
+    焼鳥はくの想い
+  </h2>
 </motion.section>
+
+🟥 禁止リスト（ぶれ防止）
+
+金箔以外の強い色演出（特に全面的な赤系グラデ）
+
+不要なパララックス、過度な粒子／火花表現
+
+影・グローの過度強調（“ギラつき”禁止）
+
+Tailwindの無意味な上書き連打（トークン外使用）
+
+追加メモ（今回の判断に反映）
+
+赤みの扱い：炭火の“残光”として点表現のみ。世界観は漆黒×金箔が主役。
+
+Hero→Concept：金の“にじみ層”で接続。Concept上端に薄い金霞を受ける。
+
+文章トーン：高単価に耐える“静謐な職人性”。必要なら後で“職人ディテール版”も差替え可。

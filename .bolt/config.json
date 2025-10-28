@@ -1,5 +1,6 @@
 {
   "ai_context_files": [
-    "./.bolt/sol.config.md"
-  ]
+    "./.bolt/sol_config.md"
+  ],
+  "defaultPrompt": "sol-autoload.prompt"
 }
