@@ -6,8 +6,7 @@ import { ConceptSection } from '../components/sections/ConceptSection';
 import { MenuSection } from '../components/sections/MenuSection';
 import { SpaceSection } from '../components/sections/SpaceSection';
 import { AccessSection } from '../components/sections/AccessSection';
-import { CTASection } from '../components/sections/CTASection';
-import { FooterSection } from '../components/sections/FooterSection';
+import ClosingSection from '../components/sections/ClosingSection';
 
 export default function Home() {
   return (
@@ -30,11 +29,8 @@ export default function Home() {
       {/* Access Section */}
       <AccessSection />
 
-      {/* CTA Section */}
-      <CTASection />
-
-      {/* Footer Section */}
-      <FooterSection />
+      {/* Closing Section */}
+      <ClosingSection />
     </div>
   );
 }

@@ -119,6 +119,7 @@ export const SpaceSection = () => {
         <div className="absolute inset-0 bg-[#a86b43]/20 blur-[140px] opacity-60 pointer-events-none"></div>
 
       <div className="relative z-10 max-w-6xl mx-auto text-center">
+        {/* カラー調整: 見出しをゴールド系に */}
         <motion.h2
           className="text-3xl md:text-4xl font-serif text-[#d8c289] mb-16 tracking-wider"
           style={{ fontFamily: "Zen Old Mincho, serif" }}
@@ -168,13 +169,15 @@ export const SpaceSection = () => {
               </div>
 
               {/* テキスト */}
+              {/* カラー調整: 小見出しは白（濃いめ） */}
               <h3
                 className="mt-6 text-xl font-serif text-warmwhite"
                 style={{ fontFamily: "Zen Old Mincho, serif" }}
               >
                 {space.title}
               </h3>
-              <p className="text-warmwhite/70 text-sm mt-1">{space.description}</p>
+              {/* カラー調整: 説明文は白（80%） */}
+              <p className="text-warmwhite/80 text-sm mt-1">{space.description}</p>
             </motion.div>
           ))}
         </div>
@@ -224,13 +227,15 @@ export const SpaceSection = () => {
                     </div>
                   </div>
 
+                  {/* カラー調整: 小見出しは白（濃いめ） */}
                   <h3
                     className="mt-4 text-lg font-serif text-warmwhite"
                     style={{ fontFamily: "Zen Old Mincho, serif" }}
                   >
                     {space.title}
                   </h3>
-                  <p className="text-warmwhite/70 text-xs mt-1">{space.description}</p>
+                  {/* カラー調整: 説明文は白（80%） */}
+                  <p className="text-warmwhite/80 text-xs mt-1">{space.description}</p>
                 </div>
               </SwiperSlide>
             ))}
