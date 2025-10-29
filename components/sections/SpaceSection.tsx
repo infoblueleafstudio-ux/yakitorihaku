@@ -41,7 +41,7 @@ export const SpaceSection = () => {
     {
       title: "カウンター席",
       description: "職人の手さばきを間近で感じる、特別な体験。",
-      image: "/images/kata.jpg",
+      image: "/images/mise5.jpg",
     },
     {
       title: "テーブル席",
@@ -120,7 +120,7 @@ export const SpaceSection = () => {
 
       <div className="relative z-10 max-w-6xl mx-auto text-center">
         <motion.h2
-          className="text-3xl md:text-4xl font-serif text-warmwhite mb-16 tracking-wider"
+          className="text-3xl md:text-4xl font-serif text-[#d8c289] mb-16 tracking-wider"
           style={{ fontFamily: "Zen Old Mincho, serif" }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -242,7 +242,7 @@ export const SpaceSection = () => {
 
         {/* CTAボタン */}
         <PrimaryCta
-          href="https://hotpepperリンクここに"
+          href="https://www.hotpepper.jp/index.html"
           label="ご予約はこちら"
           className="mt-12 md:mt-20 flex justify-center"
         />
