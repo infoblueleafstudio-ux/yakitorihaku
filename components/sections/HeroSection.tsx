@@ -4,64 +4,124 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 
 export const HeroSection = () => {
-  // 👇 セクション単位でスクロール進捗をとる
   const sectionRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    // start: セクションの先頭が画面先頭に重なった時
-    // end  : セクションの末尾が画面先頭に来た時
     offset: ["start start", "end start"],
   });
+
   const [isMobile, setIsMobile] = useState(false);
+  const [playVideo, setPlayVideo] = useState(false);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    const update = () => setIsMobile(window.innerWidth < 768);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
 
-  // ✅ 覗き穴の中心位置（PC / スマホで変更）
-  const centerX = isMobile ? 50 : 50;
-  const centerY = isMobile ? 50 : 50;
+  useEffect(() => {
+    // ✅ 覗き穴が開き始めたら動画再生
+    const unsub = scrollYProgress.on("change", (v) => {
+      if (v > 0.03) setPlayVideo(true); // ← 開き始める位置で調整可能
+    });
 
-  // ✅ 覗き穴の広がり（スピード + 最大サイズ）
+    return () => unsub();
+  }, [scrollYProgress]);
+
+  useEffect(() => {
+    // ✅ playVideoがtrueになったら動画再生
+    if (playVideo && videoRef.current) {
+      videoRef.current.play().catch((err) => {
+        console.error("動画再生エラー:", err);
+      });
+    }
+  }, [playVideo]);
+
+  // ✅ 覗き穴の広がり (mobile は大きく)
   const radius = useTransform(
     scrollYProgress,
     [0, 0.55],
-    isMobile ? [15, 190] : [15, 190]
+    isMobile ? [0, 250] : [0, 190]
   );
 
-  // ✅ 覗き穴（楕円の形）
-  // PC：横に広く（0.60） / スマホ：縦に細く（0.40）
-  const ellipse = useTransform(radius, (r) =>
+  // ✅ clip-path を自由に変更できるように変数化
+  // ここを「丸 → 楕円 → 将来は path() 」へ差し替え可能
+  const mask = useTransform(radius, (r) =>
     isMobile
-      ? `ellipse(${r * 0.80}% ${r}% at ${centerX}% ${centerY}%)` // ← スマホ：縦長
-      : `ellipse(${r * 0.30}% ${r}% at ${centerX}% ${centerY}%)` // ← PC：横広め
+      ? `ellipse(${r * 0.75}% ${r}% at 50% 50%)`
+      : `ellipse(${r * 0.30}% ${r}% at 50% 50%)`
   );
 
-  // ✅ スクロールによる画像のズーム
-  const imageScale = useTransform(scrollYProgress, [0, 0.45, 1], [0.9, 1, 1]);
+  // ✅ SCROLLボタンのフェードアウト
+  const scrollOpacity = useTransform(scrollYProgress, [0, 0.28], [1, 0]);
 
-  // ✅ Scrollラベルフェードアウト
-  const scrollOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  // ✅ 文字のフェードアウト（狭い時だけ見える）
+  const introOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
   return (
-    // 👇 ヒーロー全体の高さを “画面の約2.2倍” にしてスクロール余白を作る
-    <section ref={sectionRef} className="relative h-[220vh] md:h-[240vh]">
-      {/* 👇 ここを sticky に。画面は固定され、スクロール量だけ進む */}
+    <section
+      ref={sectionRef}
+      className="relative h-[220vh] md:h-[240vh]"
+      style={{ WebkitOverflowScrolling: "touch" }}
+    >
       <div className="sticky top-0 h-screen overflow-hidden bg-[#0a0a0a]">
-        {/* 背景（暗→光） */}
-        <motion.div
-          className={`absolute inset-0 ${
-            isMobile
-              ? "bg-gradient-to-b from-[#000] via-[#141414] to-[#1a1a1a]"
-              : "bg-gradient-to-b from-[#0a0a0a] via-[#141414] to-[#0a0a0a]"
-          }`}
-        />
 
-        {/* タイトル */}
-        <div className="absolute top-[10vh] left-0 w-full text-center z-10">
+        {/* --- 背景 (動画 + mask) --- */}
+        <motion.div
+          className="absolute inset-0"
+          style={{ clipPath: mask, WebkitClipPath: mask }}
+        >
+          <motion.video
+            ref={videoRef}
+            src="/videos/7878.mp4"
+            muted
+            playsInline
+            loop
+            autoPlay={false}
+            className="absolute w-[120%] h-[120%] md:w-[115%] md:h-[115%] object-cover object-[50%_58%] md:object-[50%_52%]"
+            style={{
+              scale: useTransform(scrollYProgress, [0, 0.45, 1], [0.9, 1, 1]),
+            }}
+          />
+        </motion.div>
+
+        {/* --- 覗き穴が狭い時のキャッチコピー --- */}
+        <motion.div
+          className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none"
+          style={{ opacity: introOpacity }}
+        >
+          <motion.p
+            className="text-[#d8c289]/90 text-[20px] md:text-[32px] tracking-[0.25em]"
+            style={{
+              fontFamily: "Yuji Syuku, serif",
+              textShadow: "0 0 22px rgba(216, 194, 137, 0.65)",
+            }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.4, ease: "easeOut" }}
+          >
+             静寂が、すべてを研ぎ澄ます。
+          </motion.p>
+
+          {/* 英語版（ゆっくり遅れてフェードイン） */}
+          <motion.p
+            className="mt-2 text-[#d8c289]/60 text-[12px] md:text-[16px] tracking-[0.18em]"
+            style={{
+              fontFamily: "Cormorant Garamond, serif",
+              textShadow: "0 0 14px rgba(216, 194, 137, 0.4)",
+            }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.8, ease: "easeOut", delay: 0.4 }}
+          >
+            Silence sharpens everything.
+          </motion.p>
+        </motion.div>
+
+        {/* --- タイトル "やきとり 箔" --- */}
+        <div className="absolute top-[8vh] md:top-[10vh] left-0 w-full text-center z-30">
           <h1
             className="text-4xl md:text-6xl text-[#d8c289] tracking-[0.1em]"
             style={{
@@ -79,24 +139,16 @@ export const HeroSection = () => {
           </p>
         </div>
 
-        {/* 覗き穴（楕円） */}
-        <motion.div style={{ clipPath: ellipse }} className="absolute inset-0">
-          <motion.video
-            src="/videos/7878.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute w-[120%] h-[120%] md:w-[115%] md:h-[115%] object-cover object-[50%_58%] md:object-[50%_52%] select-none pointer-events-none"
-            style={{ scale: imageScale }}
-            draggable={false}
-          />
-        </motion.div>
-
-        {/* Scroll ラベル */}
+        {/* --- Scroll ボタン (iPhone / PCで位置調整済み) --- */}
         <motion.div
-          className="absolute bottom-[10vh] left-1/2 -translate-x-1/2 text-center z-20"
-          style={{ opacity: scrollOpacity }}
+          className="
+            absolute left-1/2 -translate-x-1/2 z-40
+            pb-[env(safe-area-inset-bottom)]
+          "
+          style={{
+            opacity: scrollOpacity,
+            bottom: isMobile ? "14vh" : "10vh",  // ← 実機目線で微調整
+          }}
         >
           <ChevronDown
             size={22}
