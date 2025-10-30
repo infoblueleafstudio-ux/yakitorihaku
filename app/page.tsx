@@ -17,14 +17,14 @@ export default function Home() {
       {/* Hero Section */}
       <HeroSection />
 
-      {/* Concept Section */}
-      <ConceptSection />
-
       {/* Menu Section */}
       <MenuSection />
 
       {/* Space Section */}
       <SpaceSection />
+
+      {/* Concept Section */}
+      <ConceptSection />
 
       {/* Access Section */}
       <AccessSection />
