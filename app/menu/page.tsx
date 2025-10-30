@@ -72,7 +72,7 @@ const DESSERTS: MenuItem[] = [
 /** ───────── 共通コンポーネント ───────── */
 const SectionTitle = ({ children }: { children: React.ReactNode }) => (
   <h2
-    className="text-3xl md:text-4xl font-serif tracking-wide text-center mb-10 md:mb-12"
+    className="text-3xl md:text-4xl font-serif tracking-wide text-center mb-6 md:mb-12"
     style={{
       color: KINPAKU,
       fontFamily: "Zen Old Mincho, serif",
@@ -316,7 +316,7 @@ export default function MenuPage() {
           >
             Yakitori / Course & A la carte
           </p>
-          <p className="mt-6 text-white/70 text-xs md:text-sm">
+          <p className="mt-4 text-white/70 text-xs md:text-sm">
             ※ 仕入れ状況により内容・価格が変更になる場合がございます。
           </p>
         </motion.div>
@@ -325,7 +325,7 @@ export default function MenuPage() {
       {/* ───────── Navigation Menu（固定ヘッダー）───────── */}
       <nav ref={navRef} className="fixed top-0 left-0 w-full z-30 bg-[#0a0a0a]/85 backdrop-blur-md border-b border-white/10">
         <ul className="flex overflow-x-auto whitespace-nowrap px-6 py-3 md:justify-center gap-6 md:gap-10 text-sm md:text-base">
-          <li className={activeSection === "courses" ? "active" : ""}><a href="#courses" className="menu-nav" onClick={() => handleNavClick("courses")}>コース</a></li>
+          <li className={activeSection === "courses" ? "active" : ""}><a href="#courses" className="menu-nav" onClick={() => handleNavClick("courses")}>おまかせ</a></li>
           <li className={activeSection === "yakitori" ? "active" : ""}><a href="#yakitori" className="menu-nav" onClick={() => handleNavClick("yakitori")}>串焼き</a></li>
           <li className={activeSection === "rolls-veg" ? "active" : ""}><a href="#rolls-veg" className="menu-nav" onClick={() => handleNavClick("rolls-veg")}>巻き物・野菜焼き</a></li>
           <li className={activeSection === "sides" ? "active" : ""}><a href="#sides" className="menu-nav" onClick={() => handleNavClick("sides")}>一品料理</a></li>
@@ -336,8 +336,8 @@ export default function MenuPage() {
       </nav>
 
       {/* Courses */}
-      <section id="courses" className="container mx-auto px-6 md:px-10 pt-10 md:pt-12 pb-16 md:pb-24">
-        <SectionTitle>コース</SectionTitle>
+      <section id="courses" className="container mx-auto px-6 md:px-10 pt-6 md:pt-12 pb-16 md:pb-24">
+        <SectionTitle>おまかせ</SectionTitle>
 
         {/* ✅ PC：グリッド / スマホ：Swiper */}
         <FadeIn>
@@ -369,8 +369,8 @@ export default function MenuPage() {
               ))}
             </Swiper>
             
-            {/* ✅ カードの外に表示するインジケーター（カードとドットの間に16pxの余白） */}
-            <div className="course-pagination flex justify-center mt-4 min-h-[20px]"></div>
+            {/* ✅ カードの外に表示するインジケーター（カードとドットの間の余白を詰める） */}
+            <div className="course-pagination flex justify-center mt-2 min-h-[20px]"></div>
           </div>
 
         </FadeIn>
