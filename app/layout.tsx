@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, Yuji_Syuku } from 'next/font/google';
+import { Inter, Yuji_Syuku, Cormorant_Garamond } from 'next/font/google';
 import { DevGuidelines } from '@/components/dev/DevGuidelines';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -8,6 +8,12 @@ const yujiSyuku = Yuji_Syuku({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-yuji-syuku'
+});
+
+const cormorantGaramond = Cormorant_Garamond({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-cormorant-garamond'
 });
 
 export const metadata: Metadata = {
@@ -22,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${yujiSyuku.variable}`}>
+      <body className={`${inter.className} ${yujiSyuku.variable} ${cormorantGaramond.variable}`}>
         {children}
         {/* <DevGuidelines /> */}
       </body>
